@@ -29,8 +29,17 @@
       "sourceRoot": "./",
       "compilerOptions": {
         "tsConfigPath": "apps/auth/tsconfig.app.json",
-        "assets": ["proto/*.proto", "../core/**/*"],
+        "assets": ["proto/*.proto"],
         "watchAssets": true
+      }
+    },
+    "core": {
+      "type": "library",
+      "root": "core",
+      "entryFile": "index",
+      "sourceRoot": "core",
+      "compilerOptions": {
+        "tsConfigPath": "core/tsconfig.json"
       }
     },
     "common": {
