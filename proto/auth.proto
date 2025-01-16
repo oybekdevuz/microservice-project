@@ -8,6 +8,8 @@ service UsersService {
   rpc FindOneUser (FindOneUserDto) returns (User) {}
   rpc UpdateUser (UpdateUserDto) returns (User) {}
   rpc RemoveUser (FindOneUserDto) returns (User) {}
+  rpc AddBookToUser (AddBookDto) returns (User) {}
+  rpc RemoveBookFromUser (AddBookDto) returns (User) {}
 }
 
 
@@ -27,6 +29,10 @@ message UpdateUserDto {
 message FindOneUserDto {
     string id = 1;
 }
+message AddBookDto {
+    string user_id = 1;
+    string book_id = 2;
+}
 
 message Empty {};
 
@@ -43,5 +49,19 @@ message User {
     int64 deletedAt = 6;              
     string fullname = 7;               
     string username = 8;               
-    string password = 9;               
-  }
+    string password = 9;    
+    repeated Book books = 10; // Userning kitoblari           
+}
+
+message Book {
+    string id = 1;                     
+    bool isActive = 2;                
+    bool isDeleted = 3;               
+    int64 createdAt = 4;              
+    int64 updatedAt = 5;              
+    int64 deletedAt = 6;              
+    string name = 7;
+    string description = 8;
+    bool isSale = 9;             
+}
+

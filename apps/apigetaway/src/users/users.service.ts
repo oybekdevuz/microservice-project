@@ -1,6 +1,5 @@
 import { Inject, Injectable, OnModuleInit } from '@nestjs/common';
-import { CreateUserDto, UpdateUserDto, USERS_SERVICE_NAME } from '@app/common';
-import { UsersServiceClient } from '../../../../libs/common/src';
+import { AddBookDto, CreateUserDto, UpdateUserDto, USERS_SERVICE_NAME, UsersServiceClient } from '@app/common';
 import { AUTH_SERVICE } from './constants';
 import { ClientGrpc } from '@nestjs/microservices';
 
@@ -8,15 +7,21 @@ import { ClientGrpc } from '@nestjs/microservices';
 export class UsersService implements OnModuleInit {
     private usersService: UsersServiceClient;
 
-    constructor(@Inject(AUTH_SERVICE) private client: ClientGrpc) {}
-  
+    constructor(@Inject(AUTH_SERVICE) private client: ClientGrpc) { }
+
     onModuleInit() {
-      this.usersService =
-        this.client.getService<UsersServiceClient>(USERS_SERVICE_NAME);
+        this.usersService = this.client.getService<UsersServiceClient>(USERS_SERVICE_NAME);
     }
 
     create(createUserDto: CreateUserDto) {
         return this.usersService.createUser(createUserDto);
+    }
+
+    async addBookToUser(dto: AddBookDto) {
+        return this.usersService.addBookToUser(dto)
+    }
+    async removeBookfromUser(dto: AddBookDto) {
+        return this.usersService.removeBookFromUser(dto)
     }
 
     findAll() {
@@ -29,7 +34,7 @@ export class UsersService implements OnModuleInit {
 
     update(id: string, updateUserDto: UpdateUserDto) {
         updateUserDto.id = id;
-        return this.usersService.updateUser( updateUserDto );
+        return this.usersService.updateUser(updateUserDto);
     }
 
     remove(id: string) {

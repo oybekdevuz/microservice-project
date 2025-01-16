@@ -7,8 +7,10 @@
 /* eslint-disable */
 import { GrpcMethod, GrpcStreamMethod } from "@nestjs/microservices";
 import { Observable } from "rxjs";
+import { Empty } from "./baseTypes";
+import { Book } from "./book";
 
-export const protobufPackage = "auth";
+export const protobufPackageAuth = "auth";
 
 export interface CreateUserDto {
   fullname: string;
@@ -27,8 +29,11 @@ export interface FindOneUserDto {
   id: string;
 }
 
-export interface Empty {
+export interface AddBookDto {
+  userId: string;
+  bookId: string;
 }
+
 
 export interface Users {
   users: User[];
@@ -44,6 +49,8 @@ export interface User {
   fullname: string;
   username: string;
   password: string;
+  /** Userning kitoblari */
+  books: Book[];
 }
 
 export const AUTH_PACKAGE_NAME = "auth";
@@ -58,6 +65,10 @@ export interface UsersServiceClient {
   updateUser(request: UpdateUserDto): Observable<User>;
 
   removeUser(request: FindOneUserDto): Observable<User>;
+
+  addBookToUser(request: AddBookDto): Observable<User>;
+
+  removeBookFromUser(request: AddBookDto): Observable<User>;
 }
 
 export interface UsersServiceController {
@@ -70,11 +81,23 @@ export interface UsersServiceController {
   updateUser(request: UpdateUserDto): Promise<User> | Observable<User> | User;
 
   removeUser(request: FindOneUserDto): Promise<User> | Observable<User> | User;
+
+  addBookToUser(request: AddBookDto): Promise<User> | Observable<User> | User;
+
+  removeBookFromUser(request: AddBookDto): Promise<User> | Observable<User> | User;
 }
 
 export function UsersServiceControllerMethods() {
   return function (constructor: Function) {
-    const grpcMethods: string[] = ["createUser", "findAllUsers", "findOneUser", "updateUser", "removeUser"];
+    const grpcMethods: string[] = [
+      "createUser",
+      "findAllUsers",
+      "findOneUser",
+      "updateUser",
+      "removeUser",
+      "addBookToUser",
+      "removeBookFromUser",
+    ];
     for (const method of grpcMethods) {
       const descriptor: any = Reflect.getOwnPropertyDescriptor(constructor.prototype, method);
       GrpcMethod("UsersService", method)(constructor.prototype[method], method, descriptor);

@@ -1,6 +1,6 @@
 import { Controller } from '@nestjs/common';
 import { UsersService } from './users.service';
-import { CreateUserDto, FindOneUserDto, UpdateUserDto, UsersServiceController, UsersServiceControllerMethods,  } from '@app/common';
+import { CreateUserDto, FindOneUserDto, UpdateUserDto, UsersServiceController, UsersServiceControllerMethods,AddBookDto  } from '@app/common';
 
 @Controller()
 @UsersServiceControllerMethods()
@@ -9,6 +9,12 @@ export class UsersController implements UsersServiceController {
 
     createUser( createUserDto: CreateUserDto) {
         return this.usersService.create(createUserDto);
+    }
+    addBookToUser( dto: AddBookDto) {
+        return this.usersService.addBookToUser(dto);
+    }
+    removeBookFromUser( dto: AddBookDto) {
+        return this.usersService.removeBookFromUser(dto);
     }
 
     findAllUsers() {

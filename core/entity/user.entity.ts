@@ -1,6 +1,7 @@
 
-import {Column, Entity, Index } from "typeorm";
+import {Column, Entity, Index, OneToMany } from "typeorm";
 import { BaseEntity } from '@app/common';
+import { BookEntity } from "./book.entity";
 
 @Entity('users')
 export class UserEntity extends BaseEntity {
@@ -13,4 +14,7 @@ export class UserEntity extends BaseEntity {
 
   @Column({type: 'varchar'})
   public password!: string;
+
+  @OneToMany(() => BookEntity, (book) => book.user)
+  books!: BookEntity[];
 }

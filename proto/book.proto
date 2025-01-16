@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+package book;
+
+service BooksService {
+  rpc CreateBook (CreateBookDto) returns (Book) {}
+  rpc FindAllBooks (Empty) returns (Books) {}
+  rpc FindOneBook (FindOneBookDto) returns (Book) {}
+  rpc UpdateBook (UpdateBookDto) returns (Book) {}
+  rpc RemoveBook (FindOneBookDto) returns (Book) {}
+}
+
+
+message CreateBookDto {
+    string name = 1;
+    string description = 2;
+    bool isSale = 3;
+}
+
+message UpdateBookDto {
+    string id = 1;
+    string name = 2;
+    string description = 3;
+    bool isSale = 4;
+}
+
+message FindOneBookDto {
+    string id = 1;
+}
+
+message Empty {};
+
+message Books {
+    repeated Book books = 1;
+}
+
+message Book {
+    string id = 1;                     
+    bool isActive = 2;                
+    bool isDeleted = 3;               
+    int64 createdAt = 4;              
+    int64 updatedAt = 5;              
+    int64 deletedAt = 6;              
+    string name = 7;
+    string description = 8;
+    bool isSale = 9;             
+  }

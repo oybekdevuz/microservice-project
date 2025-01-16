@@ -17,7 +17,8 @@ import { join } from 'path';
                     protoPath: join(__dirname, '../auth.proto')
                 }
             }
-        ])
+        ]),
+        
     ],
     controllers: [UsersController],
     providers: [UsersService],

@@ -18,7 +18,9 @@
       "sourceRoot": "./",
       "compilerOptions": {
         "tsConfigPath": "apps/apigetaway/tsconfig.app.json",
-        "assets": ["proto/*.proto"],
+        "assets": [
+          "proto/*.proto"
+        ],
         "watchAssets": true
       }
     },
@@ -29,17 +31,10 @@
       "sourceRoot": "./",
       "compilerOptions": {
         "tsConfigPath": "apps/auth/tsconfig.app.json",
-        "assets": ["proto/*.proto"],
+        "assets": [
+          "proto/*.proto"
+        ],
         "watchAssets": true
-      }
-    },
-    "core": {
-      "type": "library",
-      "root": "core",
-      "entryFile": "index",
-      "sourceRoot": "core",
-      "compilerOptions": {
-        "tsConfigPath": "core/tsconfig.json"
       }
     },
     "common": {
@@ -49,6 +44,19 @@
       "sourceRoot": "libs/common/src",
       "compilerOptions": {
         "tsConfigPath": "libs/common/tsconfig.lib.json"
+      }
+    },
+    "book": {
+      "type": "application",
+      "root": "apps/book",
+      "entryFile": "src/main",
+      "sourceRoot": "./",
+      "compilerOptions": {
+        "tsConfigPath": "apps/book/tsconfig.app.json",
+        "assets": [
+            "proto/*.proto"
+          ],
+          "watchAssets": true
       }
     }
   }

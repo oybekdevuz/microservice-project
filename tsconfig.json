@@ -19,10 +19,10 @@
     "noFallthroughCasesInSwitch": true,
     "paths": {
       "@app/common": [
-        "libs/common/src",
+        "libs/common/src"
       ],
       "@app/common/*": [
-        "libs/common/src/*",
+        "libs/common/src/*"
       ],
       "@app/core": [
         "core/"
@@ -32,8 +32,12 @@
       ]
     }
   },
-  "include": ["apps/**/*.ts", "libs/**/*.ts", "core/**/*.ts", "config/**/*.ts"],
-
+  "include": [
+    "apps/**/*.ts",
+    "libs/**/*.ts",
+    "core/**/*.ts",
+    "config/**/*.ts"
+  ],
   "exclude": [
     "node_modules",
     "dist"
